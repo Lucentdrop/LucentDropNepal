@@ -1,0 +1,6 @@
+project_id = "lucent-drop-nepal"
+[functions.external-api]
+verify_jwt = false
+# Both functions perform their own checks. external-api verifies member JWTs via getUser.
+[functions.submit-contact]
+verify_jwt = false

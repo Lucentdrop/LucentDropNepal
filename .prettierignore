@@ -1,0 +1,7 @@
+node_modules
+.next
+out
+output
+pnpm-lock.yaml
+test-results
+public

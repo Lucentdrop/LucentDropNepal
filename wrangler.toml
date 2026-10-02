@@ -1,0 +1,5 @@
+name = "lucent-drop-nepal"
+pages_build_output_dir = "./out"
+compatibility_date = "2026-10-02"
+# Static Pages export; dynamic operations are hosted in Supabase Edge Functions.
+# Do not add paid bindings or enable a paid Workers plan for this prototype.
