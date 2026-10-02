@@ -133,7 +133,7 @@ pnpm build
 pnpm build:static
 ```
 
-Run browser tests against `pnpm dev`, or set `TEST_BASE_URL` to a production preview. Tests cover catalogue search/empty results, guest gating, demo session, saving, RFQ persistence, contact validation, responsive overflow at 375/768/1024/1440px, mobile menu, public routes and WCAG checks. PostgreSQL tests execute the actual migration with minimal auth/storage fixtures, exercising cross-user isolation, escalation prevention, document access and contact limits. They do not replace testing in your eventual Supabase project. Edge Functions require deployment or the Supabase/Deno runtime for a real integration test.
+Run browser tests against `pnpm dev`, or set `TEST_BASE_URL` to a production preview. Tests cover catalogue search/empty results, guest gating, demo session, saving, RFQ persistence, contact validation, responsive overflow at 375/768/1024/1440px, mobile menu, public routes and WCAG checks. PostgreSQL tests execute the actual migration with minimal auth/storage fixtures, exercising cross-user isolation, escalation prevention, document access and contact limits. They do not replace testing in your eventual Supabase project. Edge Functions require deployment or the Supabase/Deno runtime for a real integration test. See [the QA record](docs/QA.md) for verified results and integration limits, and [the original image prompts](docs/IMAGE-PROMPTS.md) for asset provenance.
 
 ## Upgrade only when necessary
 

@@ -52,6 +52,7 @@ export const services = [
     icon: "Container",
   },
 ];
+// DEMO ONLY: these figures are illustrative placeholders, not verified company facts.
 export const stats = [
   { value: "500+", label: "Installations Completed", icon: "BadgeCheck" },
   { value: "25+", label: "Service Regions Across Nepal", icon: "MapPin" },

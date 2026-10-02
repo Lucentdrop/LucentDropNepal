@@ -1,4 +1,5 @@
 import type { AnalyticsData } from "@/types";
+// MOCK DATA ONLY: synthetic trends; not actual plant measurements or installation records.
 export const analytics: AnalyticsData = {
   months: ["Apr", "May", "Jun", "Jul", "Aug", "Sep"],
   production: [84, 92, 88, 108, 116, 128],
