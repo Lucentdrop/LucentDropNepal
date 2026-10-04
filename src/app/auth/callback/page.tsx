@@ -1,4 +1,5 @@
 "use client";
+import { sitePath } from "@/lib/site-path";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getSupabase } from "@/lib/supabase/client";
@@ -34,7 +35,8 @@ export default function CallbackPage() {
         setError("No session found. Please sign in to continue.");
         return;
       }
-      if (active) window.location.replace(safeReturnPath(params.get("next")));
+      if (active)
+        window.location.replace(sitePath(safeReturnPath(params.get("next"))));
     })().catch(() => setError("Unable to complete sign in. Please try again."));
     return () => {
       active = false;

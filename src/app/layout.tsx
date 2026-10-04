@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { sitePath } from "@/lib/site-path";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Lucent Drop Nepal",
     description: "Smarter Water. Sustainable Future.",
-    images: ["/images/hero.webp"],
+    images: [sitePath("/images/hero.webp")],
   },
 };
 export default function RootLayout({

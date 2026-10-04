@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { sitePath } from "@/lib/site-path";
 import type { EChartsOption } from "echarts";
 import { Chart } from "@/components/charts/chart";
 import nepal from "@/data/insights/nepal.json";
@@ -226,7 +227,7 @@ function Downloads({ files }: { files: [string, string][] }) {
   return (
     <div className="insight-downloads">
       {files.map(([name, file]) => (
-        <a key={file} href={`/data/${file}`} download>
+        <a key={file} href={sitePath(`/data/${file}`)} download>
           {name} CSV ↓
         </a>
       ))}
@@ -548,7 +549,7 @@ function BusinessLoader() {
   const query = useQuery({
     queryKey: ["public-business-demo"],
     queryFn: async () => {
-      const response = await fetch("/data/lucent-demo-summary.json");
+      const response = await fetch(sitePath("/data/lucent-demo-summary.json"));
       if (!response.ok) throw new Error("Unable to load demo data");
       return response.json() as Promise<typeof businessData>;
     },

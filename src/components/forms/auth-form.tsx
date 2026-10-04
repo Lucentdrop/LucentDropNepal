@@ -1,5 +1,6 @@
 "use client";
-import Image from "next/image";
+import Image from "@/components/ui/image";
+import { sitePath } from "@/lib/site-path";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -55,7 +56,7 @@ export function AuthForm({ signup = false }: { signup?: boolean }) {
           email: values.email,
           password: values.password,
           options: {
-            emailRedirectTo: `${window.location.origin}/auth/callback`,
+            emailRedirectTo: `${window.location.origin}${sitePath("/auth/callback/")}`,
             data: {
               full_name: values.fullName,
               company: values.company,
@@ -112,7 +113,7 @@ export function AuthForm({ signup = false }: { signup?: boolean }) {
     }
     setResetting(true);
     const { error } = await client.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/auth/callback?next=/reset-password`,
+      redirectTo: `${window.location.origin}${sitePath("/auth/callback/")}?next=/reset-password`,
     });
     setResetting(false);
     setStatus(

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/ui/image";
 import { NepalMap } from "@/components/nepal-map";
 import Link from "next/link";
 import { Target, Eye, Heart, ArrowRight } from "lucide-react";
