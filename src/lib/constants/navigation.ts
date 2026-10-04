@@ -4,5 +4,6 @@ export const navigation = [
   ["Services", "/services"],
   ["Products", "/products"],
   ["Latest Updates", "/updates"],
+  ["Insights", "/insights"],
   ["Contact", "/contact"],
 ];

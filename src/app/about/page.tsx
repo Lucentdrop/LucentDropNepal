@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { NepalMap } from "@/components/nepal-map";
 import Link from "next/link";
 import { Target, Eye, Heart, ArrowRight } from "lucide-react";
 import { PageBanner, Stats, SectionHeading } from "@/components/common";
@@ -97,44 +98,27 @@ export default function AboutPage() {
       <section className="container section">
         <div className="coverage-grid">
           <div className="nepal-map">
-            <svg
-              viewBox="0 0 600 245"
-              role="img"
-              aria-label="Illustrative Nepal service coverage map, not to geographic scale"
-            >
-              <path
-                d="M34 61L75 34L135 51L178 74L223 79L268 103L315 110L363 130L407 139L454 161L500 179L562 185L575 215L534 233L477 213L445 222L393 195L350 189L307 164L269 161L224 136L171 126L130 107L83 98Z"
-                fill="#d9edfc"
-                stroke="#94bfe0"
-                strokeWidth="2"
-              />
-              {[
-                [90, 69],
-                [162, 91],
-                [230, 106],
-                [304, 132],
-                [379, 162],
-                [451, 180],
-                [526, 202],
-              ].map(([x, y], i) => (
-                <g key={x}>
-                  <path d={`M${x} ${y - 10}v30`} stroke="#a3cbe9" />
-                  <circle cx={x} cy={y} r="8" fill="#0067c5" />
-                  <circle cx={x} cy={y} r="3" fill="white" />
-                  <text
-                    x={x}
-                    y={y + 43}
-                    textAnchor="middle"
-                    fontSize="9"
-                    fill="#4d7290"
-                  >
-                    {i + 1}
-                  </text>
-                </g>
-              ))}
-            </svg>
+            <NepalMap />
             <p className="demo-caption">
-              Illustrative map · Coverage to be confirmed
+              Nepal province boundaries · Service availability to be confirmed
+            </p>
+            <p className="map-attribution">
+              Map: Survey Department of Nepal / OCHA FISS via{" "}
+              <a
+                href="https://www.geoboundaries.org/api/current/gbOpen/NPL/ADM1/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                geoBoundaries
+              </a>{" "}
+              · 2020 boundary data ·{" "}
+              <a
+                href="https://creativecommons.org/licenses/by/3.0/igo/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                CC BY 3.0 IGO
+              </a>
             </p>
           </div>
           <div>

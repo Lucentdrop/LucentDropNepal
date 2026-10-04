@@ -1,0 +1,12 @@
+{
+  "boundaryID": "NPL-ADM1-38925275",
+  "source": "Survey Department of Nepal, OCHA FISS via geoBoundaries",
+  "boundaryYear": 2020,
+  "license": "CC BY 3.0 IGO",
+  "licenseUrl": "https://creativecommons.org/licenses/by/3.0/igo/",
+  "sourceUrl": "https://data.humdata.org/dataset/administrative-bounadries-of-nepal",
+  "metadataUrl": "https://www.geoboundaries.org/api/current/gbOpen/NPL/ADM1/",
+  "downloadUrl": "https://media.githubusercontent.com/media/wmgeolab/geoBoundaries/9469f09/releaseData/gbOpen/NPL/ADM1/geoBoundaries-NPL-ADM1_simplified.geojson",
+  "retrieved": "2026-10-02",
+  "modifications": "Simplified source polygons projected to Web Mercator, fitted to SVG and styled; Province 1 and Province 2 labelled Koshi and Madhesh. No installation markers."
+}

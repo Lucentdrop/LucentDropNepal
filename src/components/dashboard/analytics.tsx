@@ -6,6 +6,7 @@ import { getAnalytics } from "@/lib/api/analytics.service";
 import { useAuth } from "@/components/providers";
 import { DashboardHeading } from "./dashboard-shell";
 import { Chart } from "@/components/charts/chart";
+import Link from "next/link";
 export function Analytics() {
   const { member } = useAuth();
   const query = useQuery({
@@ -124,6 +125,12 @@ export function Analytics() {
         title="Water Analytics"
         description="Explore illustrative trends and treatment performance."
       />
+      <p className="insight-note">
+        <Link className="text-link" href="/insights">
+          Explore public Nepal water insights, the demand planner and the full
+          Lucent business demo →
+        </Link>
+      </p>
       <div className="notice warning">
         Local mock data only. These charts do not report actual plant
         performance and must not be used for water safety or operational

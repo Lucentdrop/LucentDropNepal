@@ -54,11 +54,11 @@ export function Chart({
       <p>{description}</p>
       {children}
       {loading ? (
-        <div className="chart-state skeleton" role="status">
+        <div key="loading" className="chart-state skeleton" role="status">
           Loading chart…
         </div>
       ) : error || renderError ? (
-        <div className="chart-state" role="alert">
+        <div key="error" className="chart-state" role="alert">
           Unable to load chart
           {retry && (
             <Button size="sm" variant="outline" onClick={retry}>
@@ -67,9 +67,12 @@ export function Chart({
           )}
         </div>
       ) : empty ? (
-        <div className="chart-state">No data available for this period.</div>
+        <div key="empty" className="chart-state">
+          No data available for this period.
+        </div>
       ) : (
         <div
+          key="canvas"
           ref={ref}
           className="chart-canvas"
           role="img"

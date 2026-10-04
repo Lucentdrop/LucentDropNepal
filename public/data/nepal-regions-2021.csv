@@ -1,0 +1,4 @@
+region,households,population,tapPipedPercent,tubewellPercent,coveredWellPercent,uncoveredWellPercent,spoutPercent,riverStreamPercent,jarBottlePercent,otherPercent
+Mountain,409260,1772948,87.0,0.0,0.5,1.2,10.4,0.7,0.0,0.2
+Hill,2945030,11757624,76.5,2.1,1.8,2.7,6.0,0.5,9.7,0.7
+Tarai,3306551,15634006,35.9,58.1,1.4,1.8,1.3,0.2,0.7,0.7
