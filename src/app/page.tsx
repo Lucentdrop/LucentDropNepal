@@ -19,6 +19,7 @@ import { products } from "@/data/products";
 import { services, prototypeNotice } from "@/data/services";
 import { updates } from "@/data/updates";
 import { company } from "@/data/company";
+import { AnimatedLabel } from "@/components/animated-label";
 export default function Home() {
   return (
     <>
@@ -188,7 +189,7 @@ export default function Home() {
       <section className="updates-section">
         <div className="container section">
           <SectionHeading
-            eyebrow="What’s new"
+            eyebrow={<AnimatedLabel kind="updates" />}
             title="Latest Updates"
             description="Moving Water Solutions Forward."
             link="View All Updates"

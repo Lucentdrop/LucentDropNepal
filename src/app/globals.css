@@ -1,5 +1,125 @@
 @import "tailwindcss";
 
+.animated-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 22px;
+}
+.journal-light {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+  animation: journal-beacon 2.8s ease-in-out infinite;
+}
+.journal-title {
+  animation: journal-blink 2.8s ease-in-out infinite;
+}
+.updates-label {
+  padding-right: 10px;
+}
+.updates-label > span:first-child {
+  animation: label-title-forward 3.6s ease-in-out infinite;
+}
+.forward-trail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+.forward-trail svg {
+  width: 13px;
+  height: 13px;
+  margin-left: -5px;
+  animation: label-forward 2.4s ease-in-out infinite;
+}
+.forward-trail svg:nth-child(2) {
+  animation-delay: 0.16s;
+}
+.forward-trail svg:nth-child(3) {
+  animation-delay: 0.32s;
+}
+.animated-label:hover .journal-title,
+.animated-label:hover .journal-light,
+.animated-label:hover.updates-label > span:first-child,
+.animated-label:hover .forward-trail svg {
+  animation-play-state: paused;
+}
+@keyframes journal-blink {
+  0%,
+  40%,
+  100% {
+    opacity: 1;
+  }
+  55%,
+  70% {
+    opacity: 0.72;
+  }
+}
+@keyframes journal-beacon {
+  0%,
+  40%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  60%,
+  75% {
+    opacity: 0.35;
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+@keyframes label-forward {
+  0% {
+    transform: translateX(0);
+    opacity: 0.25;
+  }
+  25% {
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(7px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+}
+@keyframes label-title-forward {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(6px);
+    opacity: 1;
+  }
+  90% {
+    transform: translateX(8px);
+    opacity: 0;
+  }
+  91% {
+    transform: translateX(-3px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journal-title,
+  .journal-light,
+  .updates-label > span:first-child,
+  .forward-trail svg {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Public insights: official evidence and explicitly labelled demo analytics. */
 .insight-tabs {
   display: flex;

@@ -1,5 +1,6 @@
 import { PageBanner } from "@/components/common";
 import { InsightsExplorer } from "@/components/insights/explorer";
+import { AnimatedLabel } from "@/components/animated-label";
 
 export const metadata = {
   title: "Water Insights & Business Analytics",
@@ -11,7 +12,7 @@ export default function InsightsPage() {
   return (
     <>
       <PageBanner
-        eyebrow="The Water Journal"
+        eyebrow={<AnimatedLabel kind="journal" />}
         title="Water Insights"
         description="Discover. Understand. Transform."
       />

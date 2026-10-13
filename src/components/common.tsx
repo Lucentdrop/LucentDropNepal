@@ -17,7 +17,7 @@ export function PageBanner({
   description,
   image = "/images/hero.webp",
 }: {
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title: string;
   description: string;
   image?: string;
@@ -46,7 +46,7 @@ export function SectionHeading({
   link,
   href,
 }: {
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title: string;
   description?: string;
   link?: string;
