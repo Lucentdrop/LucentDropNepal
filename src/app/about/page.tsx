@@ -4,51 +4,38 @@ import Link from "next/link";
 import { Target, Eye, Heart, ArrowRight } from "lucide-react";
 import { PageBanner, Stats, SectionHeading } from "@/components/common";
 import { Button } from "@/components/ui/button";
+import { company } from "@/data/company";
 export const metadata = { title: "About Us" };
 const values = [
   {
     icon: Target,
     title: "Our Mission",
-    text: "To make reliable, thoughtfully designed water solutions more accessible to businesses and communities in Nepal.",
+    text: company.mission,
   },
   {
     icon: Eye,
     title: "Our Vision",
-    text: "A healthier Nepal where water systems are dependable, sustainable and designed around real needs.",
-  },
-  {
-    icon: Heart,
-    title: "Our Values",
-    text: "Innovation. Quality. Integrity. Sustainability. Community focus. These principles guide our approach.",
+    text: company.vision,
   },
 ];
 export default function AboutPage() {
   return (
     <>
       <PageBanner
+        eyebrow="Who we are"
         title="About Lucent Drop Nepal"
-        description="One-Stop Water Solution. A practical approach to better water for a brighter Nepal."
+        description="We Don’t Just Treat Water. We Transform It."
       />
       <section className="container section">
         <div className="about-intro">
           <div>
-            <span className="eyebrow">Water connects us all</span>
+            <span className="eyebrow">Established in 1999</span>
             <h2>
-              Better water.
-              <br />
-              <span>A brighter Nepal.</span>
+              Understanding water. <span>Creating lasting solutions.</span>
             </h2>
-            <p>
-              Lucent Drop Nepal brings water treatment, processing and support
-              together in one place. Our approach starts with understanding each
-              site’s needs, then connecting the right solutions with practical
-              long-term care.
-            </p>
-            <p>
-              This prototype introduces the planned website experience. Product
-              information, journey milestones and company statistics are
-              illustrative until verified business details are supplied.
-            </p>
+            {company.introduction.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
           </div>
           <div className="about-image">
             <Image
@@ -59,7 +46,7 @@ export default function AboutPage() {
             />
           </div>
         </div>
-        <div className="values-grid">
+        <div className="values-grid mission-grid">
           {values.map((v) => (
             <div className="value-card" key={v.title}>
               <span className="soft-icon">
@@ -70,22 +57,53 @@ export default function AboutPage() {
             </div>
           ))}
         </div>
+        <div className="company-values-section">
+          <SectionHeading eyebrow="What guides us" title="Our Core Values" />
+          <div className="values-grid">
+            {company.values.map((value) => (
+              <article className="value-card" key={value.title}>
+                <span className="soft-icon">
+                  <Heart size={22} />
+                </span>
+                <h3>{value.title}</h3>
+                <p>{value.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className="company-team-section" id="team">
+          <SectionHeading
+            eyebrow="Working with you"
+            title="Our Team"
+            description="Dependable service starts with understanding your water challenges."
+          />
+          <p>
+            We work with you to develop practical treatment solutions and
+            support them through installation, maintenance and long-term
+            technical service. Our approach is built on listening, partnership
+            and shared responsibility for the solution.
+          </p>
+          <Button asChild variant="outline">
+            <Link href="/contact">
+              Talk to Our Team <ArrowRight size={15} />
+            </Link>
+          </Button>
+        </div>
       </section>
       <section className="updates-section">
         <div className="container section">
           <SectionHeading
-            eyebrow="A connected approach"
+            eyebrow="Our Journey"
             title="Our Journey"
-            description="An illustrative roadmap from first assessment to long-term partnership."
+            description="From a Vision to a Movement for Better Water."
           />
-          <div className="timeline">
-            {[
-              ["Listen", "Understand your source water and requirements."],
-              ["Design", "Select a suitable treatment approach."],
-              ["Deliver", "Coordinate installation and commissioning."],
-              ["Support", "Maintain dependable everyday operation."],
-              ["Improve", "Review performance and plan ahead."],
-            ].map(([title, text]) => (
+          <div className="journey-copy">
+            {company.journey.map((text) => (
+              <p key={text}>{text}</p>
+            ))}
+          </div>
+          <div className="timeline company-timeline">
+            {company.journeyStages.map(({ title, text }) => (
               <div className="timeline-item" key={title}>
                 <span className="timeline-dot" />
                 <strong>{title}</strong>
@@ -155,33 +173,18 @@ export default function AboutPage() {
           description="Responsible water use starts with careful design, suitable treatment and consistent maintenance."
         />
         <div className="values-grid">
-          <div className="value-card">
-            <h3>Conserve resources</h3>
-            <p>
-              Choose systems around actual water demand and consider recovery,
-              reuse and efficient operation.
-            </p>
-          </div>
-          <div className="value-card">
-            <h3>Care for communities</h3>
-            <p>
-              Connect accessible solutions with testing, operator training and
-              responsible maintenance.
-            </p>
-          </div>
-          <div className="value-card">
-            <h3>Plan for the long term</h3>
-            <p>
-              Design for serviceability and measure performance to support
-              informed improvements.
-            </p>
-          </div>
+          {company.sustainability.map((item) => (
+            <article className="value-card" key={item.title}>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
         </div>
         <div style={{ marginTop: 30 }}>
           <Stats />
           <p className="demo-caption">
-            Illustrative prototype statistics; no verified installation history
-            is claimed.
+            Installation, region and satisfaction figures are illustrative;
+            establishment year supplied by Lucent Drop Nepal.
           </p>
         </div>
       </section>

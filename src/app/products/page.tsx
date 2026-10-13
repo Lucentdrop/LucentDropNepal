@@ -11,8 +11,8 @@ export default function ProductsPage() {
     <>
       <PageBanner
         title="Our Products"
-        eyebrow="A solution for every drop"
-        description="Explore water treatment and processing solutions for homes, businesses, industries and communities."
+        eyebrow="Our technology"
+        description="The Right Technology for Every Drop."
       />
       <section className="container section">
         <Catalogue />

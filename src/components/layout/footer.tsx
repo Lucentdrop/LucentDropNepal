@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { Mail, MapPin, ArrowUpRight, Droplets } from "lucide-react";
+import { Mail, MapPin, ArrowUpRight, Phone, Clock } from "lucide-react";
+import Image from "@/components/ui/image";
+import { company } from "@/data/company";
 import { navigation } from "@/lib/constants/navigation";
 export function Footer() {
   return (
@@ -7,20 +9,21 @@ export function Footer() {
       <div className="container footer-grid">
         <div>
           <Link href="/" className="brand footer-brand">
-            <span className="brand-mark">
-              <Droplets />
-            </span>
+            <Image
+              className="brand-logo"
+              src="/images/lucent-logo.png"
+              alt="Lucent Drop Nepal company logo"
+              width={40}
+              height={61}
+            />
             <span>
               <strong>Lucent Drop Nepal</strong>
               <small>One-Stop Water Solution</small>
             </span>
           </Link>
-          <p>
-            Thoughtful water solutions for
-            <br />a healthier and brighter Nepal.
-          </p>
+          <p>{company.tagline}</p>
           <span className="footer-note">
-            Prototype · Contact details to be confirmed
+            Water purification and treatment solutions since 1999.
           </span>
         </div>
         <div>
@@ -47,11 +50,24 @@ export function Footer() {
         <div>
           <h3>Get in Touch</h3>
           <p>
-            <MapPin size={16} /> Kathmandu, Nepal{" "}
-            <small>(illustrative location)</small>
+            <MapPin size={16} />{" "}
+            <a href={company.contact.mapUrl} target="_blank" rel="noreferrer">
+              {company.contact.address}
+            </a>
           </p>
           <p>
-            <Mail size={16} /> Contact details coming soon
+            <Mail size={16} />{" "}
+            <a href={`mailto:${company.contact.email}`}>
+              {company.contact.email}
+            </a>
+          </p>
+          <p>
+            <Phone size={16} />
+            <a href={company.contact.phoneHref}>{company.contact.phone}</a>
+          </p>
+          <p>
+            <Clock size={16} />
+            {company.contact.hours}
           </p>
           <Link className="footer-contact" href="/contact">
             Send an enquiry <ArrowUpRight size={15} />
@@ -59,9 +75,7 @@ export function Footer() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <span>
-          © {new Date().getFullYear()} Lucent Drop Nepal. Prototype preview.
-        </span>
+        <span>© {new Date().getFullYear()} Lucent Drop Nepal Pvt. Ltd.</span>
         <Link href="/terms">Privacy & Terms</Link>
         <span>Clean water. Healthier communities.</span>
       </div>

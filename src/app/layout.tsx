@@ -13,10 +13,10 @@ export const metadata: Metadata = {
     template: "%s | Lucent Drop Nepal",
   },
   description:
-    "Explore water treatment, purification, dispensing and ongoing support for businesses and communities in Nepal. Local prototype preview.",
+    "Turning Water Challenges into Solutions. Lucent Drop Nepal provides water purification, treatment and dependable technical support for Nepal’s communities and businesses since 1999.",
   openGraph: {
     title: "Lucent Drop Nepal",
-    description: "Smarter Water. Sustainable Future.",
+    description: "Turning Water Challenges into Solutions.",
     images: [sitePath("/images/hero.webp")],
   },
 };

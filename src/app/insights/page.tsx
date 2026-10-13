@@ -11,9 +11,9 @@ export default function InsightsPage() {
   return (
     <>
       <PageBanner
-        eyebrow="Data for better water decisions"
+        eyebrow="The Water Journal"
         title="Water Insights"
-        description="Nepal’s water evidence. Transparent planning. A glimpse into a growing water business."
+        description="Discover. Understand. Transform."
       />
       <InsightsExplorer />
     </>

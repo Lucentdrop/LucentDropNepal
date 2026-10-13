@@ -52,11 +52,12 @@ export const services = [
     icon: "Container",
   },
 ];
-// DEMO ONLY: these figures are illustrative placeholders, not verified company facts.
+// Installation, region and satisfaction figures are demo placeholders.
+// Establishment year is supplied in the owner's company document.
 export const stats = [
   { value: "500+", label: "Installations Completed", icon: "BadgeCheck" },
   { value: "25+", label: "Service Regions Across Nepal", icon: "MapPin" },
-  { value: "8+", label: "Years of Expertise", icon: "Clock" },
+  { value: "1999", label: "Year Established", icon: "Clock" },
   { value: "98%", label: "Client Satisfaction", icon: "HeartHandshake" },
 ];
 export const prototypeNotice =

@@ -8,8 +8,9 @@ export default function ServicesPage() {
   return (
     <>
       <PageBanner
+        eyebrow="What we do"
         title="Our Services"
-        description="Comprehensive water solutions, from consultation and system selection to after-sales support."
+        description="Solutions for Every Drop, Services for Every Need."
       />
       <section className="container section">
         <SectionHeading

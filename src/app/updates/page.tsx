@@ -5,8 +5,9 @@ export default function UpdatesPage() {
   return (
     <>
       <PageBanner
+        eyebrow="What’s new"
         title="Latest Updates"
-        description="Ideas, project perspectives and insights on water solutions and responsible resource use."
+        description="Moving Water Solutions Forward."
         image="/images/river.webp"
       />
       <section className="container section">

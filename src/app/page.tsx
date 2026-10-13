@@ -6,7 +6,6 @@ import {
   Droplets,
   Leaf,
   HeartHandshake,
-  Recycle,
   ArrowUpRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,6 +18,7 @@ import {
 import { products } from "@/data/products";
 import { services, prototypeNotice } from "@/data/services";
 import { updates } from "@/data/updates";
+import { company } from "@/data/company";
 export default function Home() {
   return (
     <>
@@ -37,14 +37,14 @@ export default function Home() {
             <ShieldCheck size={15} /> Clean water. Healthy communities.
           </span>
           <h1>
-            Smarter Water.
+            Turning Water Challenges
             <br />
-            <span>Sustainable Future.</span>
+            <span>into Solutions.</span>
           </h1>
           <p>
-            Complete water processing and treatment solutions, built around your
-            needs. Bringing together innovation, reliability and care for a
-            brighter Nepal.
+            Reliable water purification and treatment solutions since 1999.
+            Understanding your water challenges and delivering practical
+            solutions with dependable technical service.
           </p>
           <div className="hero-buttons">
             <Button asChild>
@@ -74,13 +74,26 @@ export default function Home() {
       </section>
       <div className="container stats-section">
         <Stats />
-        <p className="demo-caption">Illustrative prototype statistics</p>
+        <p className="demo-caption">
+          Installation, region and satisfaction figures are illustrative.
+        </p>
       </div>
+      <section className="container section company-home-intro">
+        <SectionHeading
+          eyebrow="Who we are"
+          title="We Don’t Just Treat Water. We Transform It."
+        />
+        <p>{company.introduction[0]}</p>
+        <p>{company.introduction[1]}</p>
+        <Link className="text-link" href="/about">
+          Discover our approach <ArrowRight size={16} />
+        </Link>
+      </section>
       <section className="container section home-services">
         <SectionHeading
-          eyebrow="Solutions for every need"
+          eyebrow="What we do"
           title="Our Services"
-          description="From the first conversation to long-term care, we’re with you at every step."
+          description="Solutions for Every Drop, Services for Every Need."
           link="View All Services"
           href="/services"
         />
@@ -120,9 +133,9 @@ export default function Home() {
             Sustainable Tomorrow
           </h2>
           <p>
-            Thoughtful water solutions can help protect natural resources and
-            support healthier communities. Let’s build a cleaner, greener Nepal
-            together.
+            We design around actual water demand, support communities through
+            testing and training, and plan for lasting performance through
+            serviceability, maintenance and monitoring.
           </p>
           <Button asChild variant="outline">
             <Link href="/about#sustainability">
@@ -132,10 +145,9 @@ export default function Home() {
         </div>
         <div className="sustainability-values">
           {[
-            [Droplets, "Conserve", "Water Resources"],
-            [Recycle, "Reduce", "Environmental Impact"],
-            [HeartHandshake, "Support", "Healthier Communities"],
-            [Leaf, "Innovate", "for a Greener Future"],
+            [Droplets, "Conserve", "Resources"],
+            [HeartHandshake, "Care for", "Communities"],
+            [Leaf, "Plan for", "the Long Term"],
           ].map(([Icon, label, sub], i) => {
             const I = Icon as typeof Droplets;
             return (
@@ -150,9 +162,9 @@ export default function Home() {
       </section>
       <section className="container section">
         <SectionHeading
-          eyebrow="Engineered for your needs"
+          eyebrow="Our technology"
           title="Featured Products"
-          description="Practical solutions. Dependable performance."
+          description="The Right Technology for Every Drop."
           link="View All Products"
           href="/products"
         />
@@ -176,9 +188,9 @@ export default function Home() {
       <section className="updates-section">
         <div className="container section">
           <SectionHeading
-            eyebrow="Knowledge & progress"
+            eyebrow="What’s new"
             title="Latest Updates"
-            description="Ideas, insights and possibilities from the world of water."
+            description="Moving Water Solutions Forward."
             link="View All Updates"
             href="/updates"
           />
@@ -192,8 +204,8 @@ export default function Home() {
       </section>
       <section className="container contact-strip">
         <div>
-          <span className="eyebrow">Let’s find your solution</span>
-          <h2>Better water starts with a conversation.</h2>
+          <span className="eyebrow">Let’s connect</span>
+          <h2>Have a Water Challenge? Let’s Solve It Together.</h2>
           <p>
             Tell us about your water needs. We’ll help you take the next step.
           </p>
