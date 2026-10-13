@@ -54,7 +54,7 @@
   }
   55%,
   70% {
-    opacity: 0.72;
+    opacity: 0;
   }
 }
 @keyframes journal-beacon {
