@@ -1,34 +1,72 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import provinces from "@/data/nepal-map.json";
+import { provinceActivity } from "@/data/province-activity";
+import { X, Pin, BarChart3 } from "lucide-react";
 
 export function NepalMap() {
+  const mapRef = useRef<SVGSVGElement>(null);
   const [hovered, setHovered] = useState<number | null>(null);
   const [focused, setFocused] = useState<number | null>(null);
   const [selected, setSelected] = useState<number | null>(null);
+  const [lastProvince, setLastProvince] = useState(3);
   const active = hovered ?? focused ?? selected;
-  const toggle = (id: number) =>
-    setSelected((current) => (current === id ? null : id));
+  const displayed = selected ?? hovered ?? focused;
+  const visible = displayed !== null;
+  const displayedId = displayed ?? lastProvince;
+  const province = provinces.find((p) => p.id === displayedId)!;
+  const data = provinceActivity.find((p) => p.id === displayedId)!;
+  const choose = (id: number) => {
+    setLastProvince(id);
+    setSelected(id);
+  };
+  const close = () => {
+    if (displayed !== null) setLastProvince(displayed);
+    setSelected(null);
+    setHovered(null);
+    setFocused(null);
+    mapRef.current?.focus({ preventScroll: true });
+  };
+  const format = (value: number) =>
+    new Intl.NumberFormat("en-NP").format(value);
+  const rows = [
+    ["Projects completed", format(data.projects)],
+    ["Water ATMs installed", format(data.waterAtms)],
+    ["Satisfaction rate", `${data.satisfaction}%`],
+    ["Projects in progress", format(data.activeProjects)],
+    ["Service partners", format(data.servicePartners)],
+    ["Water dispensed / month", `${format(data.monthlyLitres / 1000)} kL`],
+  ];
   const layers = [...provinces].sort(
     (a, b) => Number(a.id === active) - Number(b.id === active),
   );
 
   return (
-    <div className="interactive-nepal-map">
+    <div
+      className="interactive-nepal-map"
+      onKeyDown={(event) => {
+        if (event.key === "Escape") {
+          event.stopPropagation();
+          close();
+        }
+      }}
+    >
       <svg
+        ref={mapRef}
+        tabIndex={-1}
         viewBox="0 0 900 420"
         role="group"
         aria-labelledby="nepal-map-title nepal-map-description"
         onKeyDown={(event) => {
-          if (event.key === "Escape") setSelected(null);
+          if (event.key === "Escape") close();
         }}
       >
         <title id="nepal-map-title">Nepal’s seven provinces</title>
         <desc id="nepal-map-description">
           Hover or focus a province to lift it. Click, tap, Enter or Space to
-          toggle selection. Escape clears selection. Service availability
-          requires confirmation.
+          pin province demo statistics below the map. Escape closes the panel.
+          Service availability requires confirmation.
         </desc>
         {/* Stationary silhouettes and hit areas keep hover stable while visuals lift. */}
         <g aria-hidden="true" className="province-foundations">
@@ -57,18 +95,25 @@ export function NepalMap() {
               tabIndex={0}
               aria-label={`${p.name} province`}
               aria-pressed={selected === p.id}
+              aria-controls="province-statistics"
               className="province-hit"
               onPointerEnter={(e) => {
-                if (e.pointerType !== "touch") setHovered(p.id);
+                if (e.pointerType !== "touch") {
+                  setLastProvince(p.id);
+                  setHovered(p.id);
+                }
               }}
               onPointerLeave={() => setHovered(null)}
-              onFocus={() => setFocused(p.id)}
+              onFocus={() => {
+                setLastProvince(p.id);
+                setFocused(p.id);
+              }}
               onBlur={() => setFocused(null)}
-              onClick={() => toggle(p.id)}
+              onClick={() => choose(p.id)}
               onKeyDown={(e) => {
                 if (e.key === "Enter" || e.key === " ") {
                   e.preventDefault();
-                  toggle(p.id);
+                  choose(p.id);
                 }
               }}
             >
@@ -79,9 +124,68 @@ export function NepalMap() {
       </svg>
       <p className="map-interaction-hint" aria-live="polite">
         {selected
-          ? `${provinces.find((p) => p.id === selected)?.name} selected · Click again or press Escape to clear`
-          : "Hover to lift · Click or tap to select a province"}
+          ? `${provinces.find((p) => p.id === selected)?.name} pinned · Click another province to compare`
+          : "Hover for demo statistics · Click or tap to keep them open"}
       </p>
+      <div
+        className={`province-popup-slot ${visible ? "is-open" : ""}`}
+        aria-hidden={!visible}
+        inert={!visible}
+      >
+        <div className="province-popup-clip">
+          <section
+            id="province-statistics"
+            className="province-popup"
+            role="region"
+            aria-labelledby="province-statistics-title"
+          >
+            <div className="province-popup-header">
+              <span className="province-popup-icon">
+                <BarChart3 size={19} />
+              </span>
+              <div>
+                <span className="province-demo-label">
+                  Demo province activity
+                </span>
+                <h3 id="province-statistics-title">{province.name}</h3>
+              </div>
+              {selected && (
+                <span className="province-pinned">
+                  <Pin size={12} />
+                  Pinned
+                </span>
+              )}
+              <button
+                type="button"
+                className="province-popup-close"
+                aria-label="Close province statistics"
+                onClick={close}
+              >
+                <X size={18} />
+              </button>
+            </div>
+            <div key={displayedId} className="province-popup-data">
+              <table>
+                <caption className="sr-only">
+                  {province.name} illustrative activity statistics
+                </caption>
+                <tbody>
+                  {rows.map(([label, value]) => (
+                    <tr key={label}>
+                      <th scope="row">{label}</th>
+                      <td>{value}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="province-popup-note">
+              Illustrative figures only · Not actual Lucent results or verified
+              Water ATM locations.
+            </p>
+          </section>
+        </div>
+      </div>
     </div>
   );
 }

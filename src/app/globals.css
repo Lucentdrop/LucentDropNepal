@@ -1695,11 +1695,12 @@ p {
 .map-attribution a {
   text-decoration: underline;
 }
-.interactive-nepal-map svg {
+.interactive-nepal-map > svg {
   display: block;
   width: 100%;
   height: auto;
   overflow: visible;
+  outline: none;
 }
 .province-foundations path,
 .province-surface path {
@@ -1756,6 +1757,159 @@ p {
   font-size: 11px;
   line-height: 1.6;
   margin: 6px 0 8px;
+}
+.province-popup-slot {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    grid-template-rows 240ms ease,
+    opacity 200ms ease,
+    transform 240ms ease;
+  pointer-events: none;
+}
+.province-popup-slot.is-open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.province-popup-clip {
+  min-height: 0;
+  overflow: hidden;
+}
+.province-popup {
+  margin: 8px 1px 2px;
+  border: 1px solid #b9d8ee;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 8px 24px #06396014;
+  overflow: hidden;
+}
+.province-popup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  background: linear-gradient(110deg, #eaf6ff, #f8fcff);
+  border-bottom: 1px solid #e0edf7;
+}
+.province-popup-icon {
+  display: grid;
+  place-items: center;
+  color: #0067c5;
+  background: #d6ebfc;
+  border-radius: 9px;
+  width: 36px;
+  height: 36px;
+  flex: none;
+}
+.province-demo-label {
+  display: block;
+  font-size: 10px;
+  color: #47647a;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.province-popup-header h3 {
+  margin-top: 3px;
+  font-size: 18px;
+  color: #063960;
+  line-height: 1.2;
+}
+.province-pinned {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: #005daf;
+  background: #deeffc;
+  padding: 5px 7px;
+  border-radius: 20px;
+}
+.province-popup-close {
+  margin-left: auto;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #c8dfee;
+  border-radius: 8px;
+  color: #315c81;
+  background: white;
+  cursor: pointer;
+}
+.province-pinned + .province-popup-close {
+  margin-left: 0;
+}
+.province-popup-close:hover {
+  background: #e5f2fc;
+  color: #005daf;
+}
+.province-popup-close:focus-visible {
+  outline: 3px solid #009dbb;
+  outline-offset: 2px;
+}
+.province-popup-data {
+  padding: 3px 18px;
+  animation: province-data-in 180ms ease;
+}
+.province-popup table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+}
+.province-popup th,
+.province-popup td {
+  padding: 10px 0;
+  border-bottom: 1px solid #edf3f8;
+}
+.province-popup th {
+  text-align: left;
+  color: #52667a;
+  font-weight: 500;
+}
+.province-popup td {
+  text-align: right;
+  color: #063960;
+  font-weight: 700;
+  white-space: nowrap;
+  padding-left: 14px;
+  font-variant-numeric: tabular-nums;
+}
+.province-popup tr:last-child th,
+.province-popup tr:last-child td {
+  border-bottom: 0;
+}
+.province-popup-note {
+  padding: 12px 18px;
+  margin: 0;
+  color: #73521c;
+  background: #fff8ea;
+  font-size: 10px;
+  line-height: 1.6;
+}
+@keyframes province-data-in {
+  from {
+    opacity: 0.4;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .province-popup-slot {
+    transition: none;
+    transform: none;
+  }
+  .province-popup-data {
+    animation: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .province-surface,
