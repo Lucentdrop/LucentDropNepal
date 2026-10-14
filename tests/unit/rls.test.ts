@@ -91,6 +91,10 @@ describe("database access policies in local PostgreSQL", () => {
     ).toEqual([]);
   });
   it("ignores signup role metadata and forbids member role escalation", async () => {
+    await db.exec("reset role");
+    await db.query("delete from public.contact_requests where id=$1", [
+      "00000000-0000-0000-0000-000000000010",
+    ]);
     const result = await asUser(
       alice,
       `select role from public.profiles where id='${alice}'`,
