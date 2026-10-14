@@ -3337,8 +3337,8 @@ p {
     min-height: 210px;
     padding: 12px;
   }
-  .nepal-map svg {
-    height: 170px;
+  .nepal-map .interactive-nepal-map > svg {
+    height: auto;
   }
   .service-page-grid {
     grid-template-columns: 1fr;
