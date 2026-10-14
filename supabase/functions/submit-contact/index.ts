@@ -1,6 +1,7 @@
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { z } from "npm:zod@4";
 import { cors, json } from "../_shared/http.ts";
+import { notifyEnquiry } from "../_shared/contact-email.ts";
 const inputSchema = z.object({
   name: z.string().trim().min(2).max(120),
   company: z.string().max(120),
@@ -52,9 +53,10 @@ Deno.serve(async (req) => {
       Deno.env.get("SUPABASE_URL")!,
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
     );
+    const requestId = crypto.randomUUID();
     const { error } = await client.rpc("submit_contact", {
       p_key: hashed,
-      p_payload: parsed.data,
+      p_payload: { ...parsed.data, request_id: requestId },
     });
     if (error)
       return json(
@@ -67,7 +69,28 @@ Deno.serve(async (req) => {
         error.code === "P0001" ? 429 : 500,
         headers,
       );
-    return json({ ok: true }, 201, headers);
+    const notification = await notifyEnquiry(requestId, parsed.data, {
+      apiKey: Deno.env.get("RESEND_API_KEY"),
+      from: Deno.env.get("CONTACT_NOTIFY_FROM"),
+      to: Deno.env.get("CONTACT_NOTIFY_TO"),
+    });
+    if (notification !== "pending") {
+      const { error: notificationError } = await client
+        .from("contact_requests")
+        .update({
+          notification_status: notification,
+          notification_attempted_at: new Date().toISOString(),
+        })
+        .eq("id", requestId);
+      if (notificationError)
+        console.error(
+          "Unable to update enquiry notification status",
+          requestId,
+        );
+    }
+    // The enquiry is received even if the provider is down. Do not ask the
+    // visitor to submit duplicates or claim confirmed inbox delivery.
+    return json({ ok: true, reference: requestId }, 201, headers);
   } catch {
     return json({ error: "Unable to process enquiry" }, 400, headers);
   }

@@ -28,11 +28,67 @@ describe("database access policies in local PostgreSQL", () => {
       ),
     );
     await db.exec(
+      await readFile(
+        "supabase/migrations/202610130001_contact_notifications.sql",
+        "utf8",
+      ),
+    );
+    await db.exec(
       `insert into auth.users values('${alice}','alice@example.com','{"full_name":"Alice","company":"Alice Company","role":"admin"}'),('${bob}','bob@example.com','{"full_name":"Bob","company":"Bob Company"}'),('${admin}','admin@example.com','{"full_name":"Admin"}'); update public.profiles set role='admin' where id='${admin}'; insert into public.contact_requests(name,email,phone,type,message) values('Test','test@example.com','1234567','General enquiry','Test contact enquiry'); insert into public.documents(external_product_id,name,storage_path,access_level) values('ro-001','Member guide','member.pdf','member'),('ro-001','Internal guide','admin.pdf','admin');insert into storage.objects(bucket_id,name) values('product-documents','member.pdf'),('product-documents','admin.pdf'),('product-documents','unregistered.pdf');`,
     );
   }, 30000);
   afterAll(async () => {
     await db.close();
+  });
+  it("preserves a received enquiry when its notification fails", async () => {
+    await db.exec("reset role");
+    const id = "00000000-0000-0000-0000-000000000010";
+    await db.query("select public.submit_contact($1,$2::jsonb)", [
+      "notification-test",
+      JSON.stringify({
+        request_id: id,
+        name: "Test Sender",
+        company: "Test",
+        email: "test@example.com",
+        phone: "9812345678",
+        type: "General enquiry",
+        location: "Kathmandu",
+        message: "Test notification persistence",
+      }),
+    ]);
+    expect(
+      (
+        await db.query(
+          "select notification_status from public.contact_requests where id=$1",
+          [id],
+        )
+      ).rows,
+    ).toEqual([{ notification_status: "pending" }]);
+    await db.query(
+      "update public.contact_requests set notification_status='failed' where id=$1",
+      [id],
+    );
+    expect(
+      (
+        await db.query(
+          "select message,notification_status from public.contact_requests where id=$1",
+          [id],
+        )
+      ).rows,
+    ).toEqual([
+      {
+        message: "Test notification persistence",
+        notification_status: "failed",
+      },
+    ]);
+    expect(
+      (
+        await asUser(
+          bob,
+          `select id from public.contact_requests where id='${id}'`,
+        )
+      ).rows,
+    ).toEqual([]);
   });
   it("ignores signup role metadata and forbids member role escalation", async () => {
     const result = await asUser(
