@@ -6,6 +6,7 @@ import { Send, CheckCircle2 } from "lucide-react";
 import { contactSchema, type ContactValues } from "@/lib/validation/forms";
 import { getSupabase } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
+import { sendContactNotification } from "@/lib/api/contact-notification";
 export function ContactForm() {
   const [status, setStatus] = useState<{ type: string; text: string } | null>(
     null,
@@ -24,11 +25,24 @@ export function ContactForm() {
     try {
       const client = getSupabase();
       if (client) {
-        const { error } = await client.functions.invoke("submit-contact", {
-          body: values,
-        });
+        const { data, error } = await client.functions.invoke(
+          "submit-contact",
+          {
+            body: values,
+          },
+        );
         if (error)
           throw new Error("Unable to send your enquiry. Please try again.");
+        // Save first. A browser/provider failure must not discard the enquiry
+        // or prompt a duplicate submission. Never notify from demo mode.
+        if (typeof data?.reference === "string") {
+          const notified = await sendContactNotification(
+            values,
+            data.reference,
+          );
+          if (!notified)
+            console.warn("Enquiry saved; notification is unavailable.");
+        }
         setStatus({
           type: "success",
           text: "Your enquiry has been received. Thank you for getting in touch.",

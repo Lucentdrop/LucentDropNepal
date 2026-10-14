@@ -26,6 +26,22 @@ Notification status records `pending`, `accepted` or `failed`. Accepted means th
 
 ## Email options
 
+### Selected enquiry provider: EmailJS with Gmail
+
+The owner chose EmailJS and confirmed `ry753014@gmail.com` as the notification recipient. This does not change the public business contact address, `amrahspr@gmail.com`.
+
+1. Create a free EmailJS account and connect a Gmail email service. Record its Service ID.
+2. Create an enquiry-notification template. Set **To Email** to the fixed address `ry753014@gmail.com`. Do not use a visitor-controlled `to_email` variable. Set **Reply To** to `{{reply_to}}` and subject to `Lucent enquiry: {{enquiry_type}}`.
+3. Template body variables: `{{from_name}}`, `{{company}}`, `{{reply_to}}`, `{{phone}}`, `{{enquiry_type}}`, `{{location}}`, `{{message}}`, `{{request_reference}}`. Insert message values through ordinary escaped variables; do not enable unescaped visitor HTML.
+4. Add GitHub Actions secrets `NEXT_PUBLIC_EMAILJS_SERVICE_ID`, `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID` and `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`. These IDs and the public key are frontend settings, not Gmail credentials. Never provide a Gmail password or EmailJS private key to the frontend.
+5. Rebuild the site after Supabase storage and the Edge Function are activated. The browser sends EmailJS notifications only after successful storage with a returned enquiry reference. Demo submissions send nothing. A mail failure leaves the enquiry saved.
+
+Review EmailJS delivery history separately. Supabase's `notification_status` tracks the optional server-side Resend path only; browser EmailJS outcomes are not treated as trusted database delivery assertions. Leave `RESEND_API_KEY`, `CONTACT_NOTIFY_FROM` and `CONTACT_NOTIFY_TO` unset when using EmailJS, to avoid duplicate notifications.
+
+### Authentication email with no domain
+
+EmailJS does not act as Supabase SMTP. Configure an SMTP sender separately for signup confirmations and password resets. One low-volume option is Gmail SMTP if the chosen Google account supports two-step verification and app passwords: host `smtp.gmail.com`, port `465`, username the full Gmail address, password a dedicated Google app password, sender address that same Gmail address. Enter the app password directly in Supabase Auth's SMTP settings; never commit it or send it in chat. Account restrictions and provider quotas apply. Use a dedicated Lucent sender account and verify delivery before enabling public signups.
+
 - EmailJS can connect an existing Gmail account for low-volume enquiry notifications. Its free plan currently allows 200 requests/month. Configure a fixed notification recipient in the template rather than letting visitors choose the destination. EmailJS is not a substitute for Supabase's authentication SMTP configuration.
 - A provider such as Resend can serve server-side notifications and authentication SMTP after verifying a sender domain. Its free daily cap is currently 100 emails; authentication and notification usage share the applicable provider limits.
 
