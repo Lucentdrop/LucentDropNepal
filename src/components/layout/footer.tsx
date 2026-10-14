@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Mail, MapPin, ArrowUpRight, Phone, Clock } from "lucide-react";
 import Image from "@/components/ui/image";
-import { company } from "@/data/company";
+import { company, brandTagline } from "@/data/company";
 import { navigation } from "@/lib/constants/navigation";
 export function Footer() {
   return (
@@ -18,7 +18,11 @@ export function Footer() {
             />
             <span>
               <strong>Lucent Drop Nepal</strong>
-              <small>One-Stop Water Solution</small>
+              <small>
+                {brandTagline.map((line) => (
+                  <span key={line}>{line}</span>
+                ))}
+              </small>
             </span>
           </Link>
           <p>{company.tagline}</p>

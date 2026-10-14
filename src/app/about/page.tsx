@@ -176,7 +176,10 @@ export default function AboutPage() {
         />
         <div className="values-grid">
           {company.sustainability.map((item) => (
-            <article className="value-card" key={item.title}>
+            <article
+              className="value-card sustainability-card"
+              key={item.title}
+            >
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { sitePath } from "@/lib/site-path";
+import { brandTagline } from "@/data/company";
 import { Providers } from "@/components/providers";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
     process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   ),
   title: {
-    default: "Lucent Drop Nepal | One-Stop Water Solution",
+    default: `Lucent Drop Nepal | ${brandTagline.join(" ")}`,
     template: "%s | Lucent Drop Nepal",
   },
   description:

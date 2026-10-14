@@ -1,5 +1,10 @@
 // Public company copy supplied by the owner in Working on Website for lucent nepal.docx.
 // Drafting prompts, suggested photos and unprovided milestones are not public copy.
+export const brandTagline = [
+  "Understanding water.",
+  "Creating lasting solutions.",
+];
+
 export const company = {
   name: "Lucent Drop Nepal Pvt. Ltd.",
   established: "1999",

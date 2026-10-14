@@ -7,6 +7,7 @@ import Image from "@/components/ui/image";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/components/providers";
 import { navigation } from "@/lib/constants/navigation";
+import { brandTagline } from "@/data/company";
 export function Brand() {
   return (
     <Link href="/" className="brand" aria-label="Lucent Drop Nepal home">
@@ -19,7 +20,11 @@ export function Brand() {
       />
       <span>
         <strong>Lucent Drop Nepal</strong>
-        <small>One-Stop Water Solution</small>
+        <small>
+          {brandTagline.map((line) => (
+            <span key={line}>{line}</span>
+          ))}
+        </small>
       </span>
     </Link>
   );

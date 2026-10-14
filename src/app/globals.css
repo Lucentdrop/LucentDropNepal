@@ -608,6 +608,9 @@ p {
   font-style: italic;
   line-height: 1.8;
 }
+.brand small span {
+  display: block;
+}
 .brand-logo {
   width: 40px;
   height: 61px;
@@ -3394,6 +3397,18 @@ p {
   .value-card p {
     font-size: 11px;
     margin-top: 7px;
+  }
+  .value-card.sustainability-card {
+    display: block;
+    min-width: 0;
+  }
+  .sustainability-card h3 {
+    line-height: 1.4;
+    margin: 0 0 10px;
+  }
+  .sustainability-card p {
+    line-height: 1.8;
+    margin: 0;
   }
   .timeline {
     grid-template-columns: 1fr;
