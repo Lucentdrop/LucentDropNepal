@@ -114,32 +114,34 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="container section">
-        <div className="coverage-grid">
-          <div className="nepal-map">
-            <NepalMap />
-            <p className="demo-caption">
-              Nepal province boundaries · Service availability to be confirmed
-            </p>
-            <p className="map-attribution">
-              Map: Survey Department of Nepal / OCHA FISS via{" "}
-              <a
-                href="https://www.geoboundaries.org/api/current/gbOpen/NPL/ADM1/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                geoBoundaries
-              </a>{" "}
-              · 2020 boundary data ·{" "}
-              <a
-                href="https://creativecommons.org/licenses/by/3.0/igo/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                CC BY 3.0 IGO
-              </a>
-            </p>
-          </div>
-          <div>
+        <NepalMap
+          attribution={
+            <>
+              <p className="demo-caption">
+                Nepal province boundaries · Service availability to be confirmed
+              </p>
+              <p className="map-attribution">
+                Map: Survey Department of Nepal / OCHA FISS via{" "}
+                <a
+                  href="https://www.geoboundaries.org/api/current/gbOpen/NPL/ADM1/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  geoBoundaries
+                </a>{" "}
+                · 2020 boundary data ·{" "}
+                <a
+                  href="https://creativecommons.org/licenses/by/3.0/igo/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  CC BY 3.0 IGO
+                </a>
+              </p>
+            </>
+          }
+        >
+          <div className="coverage-description">
             <SectionHeading
               eyebrow="Closer to your needs"
               title="Service Coverage"
@@ -164,7 +166,7 @@ export default function AboutPage() {
               </Link>
             </Button>
           </div>
-        </div>
+        </NepalMap>
       </section>
       <section className="container section" id="sustainability">
         <SectionHeading

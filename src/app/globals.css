@@ -1759,25 +1759,110 @@ p {
   margin: 6px 0 8px;
 }
 .province-popup-slot {
-  display: grid;
-  grid-template-rows: 0fr;
+  position: absolute;
+  inset: 0;
   opacity: 0;
   transform: translateY(8px);
   transition:
-    grid-template-rows 240ms ease,
     opacity 200ms ease,
     transform 240ms ease;
   pointer-events: none;
 }
 .province-popup-slot.is-open {
-  grid-template-rows: 1fr;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
 }
 .province-popup-clip {
   min-height: 0;
-  overflow: hidden;
+  overflow: visible;
+}
+.province-coverage {
+  align-items: start;
+}
+.coverage-side {
+  min-width: 0;
+}
+.province-activity-space {
+  position: relative;
+  min-height: 370px;
+  margin-bottom: 26px;
+}
+.province-activity-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 355px;
+  padding: 28px;
+  border: 1px dashed #c4dfee;
+  border-radius: 14px;
+  background: #f8fcff;
+}
+.province-activity-placeholder .eyebrow {
+  margin-top: 16px;
+}
+.province-activity-placeholder h3 {
+  font-size: 22px;
+  margin: 7px 0 10px;
+}
+.province-activity-placeholder p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #52667a;
+}
+.province-activity-placeholder small {
+  margin-top: 16px;
+  color: #52667a;
+  font-size: 11px;
+}
+.province-activity-placeholder[aria-hidden="true"] {
+  opacity: 0;
+}
+.interactive-nepal-map > svg {
+  scroll-margin-top: 95px;
+}
+@media (max-width: 900px) {
+  .coverage-grid.province-coverage {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .province-activity-space {
+    min-height: 0;
+    margin: 0;
+  }
+  .province-activity-placeholder {
+    display: none;
+  }
+  .province-popup-slot {
+    position: fixed;
+    inset: auto 14px 14px;
+    z-index: 60;
+    max-height: min(45vh, 380px);
+    overflow-y: auto;
+    border-radius: 14px;
+    box-shadow: 0 10px 40px #06396035;
+  }
+  .province-popup-slot:not(.is-open) {
+    visibility: hidden;
+  }
+  .province-popup-slot .province-popup {
+    margin: 0;
+    overflow: visible;
+  }
+  .province-popup-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  .province-popup th,
+  .province-popup td {
+    padding: 8px 0;
+  }
+  .province-popup-note {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
 }
 .province-popup {
   margin: 8px 1px 2px;
