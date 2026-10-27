@@ -26,6 +26,9 @@ export const analyticsSchema = z.object({
   production: z.array(z.number()),
   regions: z.array(z.string()),
   installations: z.array(z.number()),
+  installationTypes: z
+    .array(z.object({ name: z.string(), values: z.array(z.number()) }))
+    .optional(),
   categories: z.array(z.object({ name: z.string(), value: z.number() })),
   performance: z.object({
     tds: z.array(z.number()),

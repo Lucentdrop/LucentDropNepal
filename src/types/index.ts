@@ -49,6 +49,7 @@ export interface AnalyticsData {
   production: number[];
   regions: string[];
   installations: number[];
+  installationTypes?: { name: string; values: number[] }[];
   categories: { name: string; value: number }[];
   performance: {
     tds: number[];

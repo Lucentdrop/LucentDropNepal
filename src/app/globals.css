@@ -2361,6 +2361,12 @@ p {
   grid-template-columns: 218px 1fr;
   gap: 28px;
 }
+.dashboard-layout > * {
+  min-width: 0;
+}
+.analytics-insights-link {
+  white-space: normal;
+}
 .dashboard-sidebar {
   background: white;
   border: 1px solid var(--color-border);
